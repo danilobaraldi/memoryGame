@@ -4,7 +4,7 @@
     <meta charset="UTF-8">
     <meta http-equiv="X-UA-Compatible" content="IE=edge">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <link rel="stylesheet" type="text/css" href="./assets/script/style.css">
+    <link rel="stylesheet" type="text/css" href="./assets/script/reset.css">
     <link rel="stylesheet" type="text/css" href="./assets/script/style.css">
     <link href="https://fonts.googleapis.com/css2?family=Righteous&display=swap" rel="stylesheet">
 
@@ -12,14 +12,21 @@
 </head>
 <body>
     
-    <div id="" class="card" data-icon="bootstrap">
-        <div class="card_front">
-            <img class="icon" src="./assets/images/bootstrap.png" alt="">
+    <div class="gameBoard">
+        <!-- <div id="" class="card flip" data-icon="bootstrap">
+            <div class="card_front">
+                <img class="icon" src="./assets/images/bootstrap.png" alt="">
+            </div>
+            <div class="card_back">
+                &lt/&gt
+            </div>
+        </div> -->
+    </div>
+    <div id="gameOver">
+        <div>
+            Parabéns, você completou o jogo! 
         </div>
-        <div class="card_back">
-            &lt/$gt
-        </div>
-
+        <button id="restart" onclick="restart()">Jogue novamente</button>
     </div>
 
     <script src="./assets/script/script.js"></script>
