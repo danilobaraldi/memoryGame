@@ -12,9 +12,9 @@ function startGame() {
 
 function initializeCards(cards) {
     let gameBoard = document.getElementById("gameBoard");
-
+    gameBoard.innerHTML = "";
     game.cards.forEach(card => {
-        
+
         let cardElement = document.createElement('div');
         cardElement.id = card.id;
         cardElement.classList.add(CARD);
@@ -25,25 +25,25 @@ function initializeCards(cards) {
         cardElement.addEventListener('click', flipCard);
         gameBoard.appendChild(cardElement);
 
-    })    
+    });
 }
 
 function createCardContent(card, cardElement) {
-    
+
     createCardFace(FRONT, card, cardElement);
     createCardFace(BACK, card, cardElement);
 }
 
-function createCardFace(face, card, element){
+function createCardFace(face, card, element) {
 
     let cardElementFace = document.createElement('div');
     cardElementFace.classList.add(face);
-    if (face === FRONT){
+    if (face === FRONT) {
         let iconElement = document.createElement('img');
         iconElement.classList.add(ICON);
-        iconElement.src="./assets/images/" + card.icon + ".png";
+        iconElement.src = "./assets/images/" + card.icon + ".png";
         cardElementFace.appendChild(iconElement);
-    }else{
+    } else {
         cardElementFace.innerHTML = "&lt/&gt";
     }
     element.appendChild(cardElementFace);
@@ -53,8 +53,40 @@ function createCardFace(face, card, element){
 
 
 
-function flipCard(){
+function flipCard() {
 
-    this.classList.add("flip");
+    if (game.setCard(this.id)) {
 
+        this.classList.add("flip");
+        if (game.secondCard) {
+            if (game.checkMatch()) {
+                game.clearCards();
+                if (game.checkGameOver()) {
+                    let gameOverLayer = document.getElementById("gameOver");
+                    gameOverLayer.style.display = "flex";
+                }
+            } else {
+                setTimeout(() => {
+                    let firstCardView = document.getElementById(game.firstCard.id);
+                    let secondCardView = document.getElementById(game.secondCard.id);
+
+                    firstCardView.classList.remove('flip');
+                    secondCardView.classList.remove('flip');
+                    game.unflipCards();
+                }, 1000);
+
+
+            }
+        }
+    }
+
+
+
+}
+
+function restart() {
+    game.clearCards();
+    startGame();
+    let gameOverLayer = document.getElementById("gameOver");
+    gameOverLayer.style.display = "none";
 }
